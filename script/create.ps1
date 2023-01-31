@@ -54,7 +54,7 @@ try{
             }else{
                 Write-Host "No File found" -foregroundcolor Red
             }
-    Clear-CSV
+    #Clear-CSV
     $counter = 0
     
     Write-Output "`n`n------------------BEGIN-------------------------"
@@ -95,6 +95,7 @@ try{
     #--Clear CSV Funtionality
     Function Clear-CSV{
         #add clear CSV funtionality here
+        #To be tested
         (Get-Content .$CreateCSV |  Select -First 1) | Out-File $CreateCSV
     }
 }
