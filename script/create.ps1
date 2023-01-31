@@ -44,9 +44,17 @@ try{
         }
 
     }
-   
+
     $json = Get-Content "$RootPath\config.json" -Raw | ConvertFrom-Json 
     $CreateCSV = Import-Csv -Path "$RootPath\create.csv"
+
+    #Check file path of CSV function
+            if (Test-Path $CreateCSV) {
+                Write-Host "File Existed"
+            }else{
+                Write-Host "No File found" -foregroundcolor Red
+            }
+    Clear-CSV
     $counter = 0
     
     Write-Output "`n`n------------------BEGIN-------------------------"
@@ -84,9 +92,12 @@ try{
     }
 
     Get-Kill
+    #--Clear CSV Funtionality
+    Function Clear-CSV{
+        #add clear CSV funtionality here
+        (Get-Content .$CreateCSV |  Select -First 1) | Out-File $CreateCSV
+    }
 }
 catch{
     Get-Kill -Mode "Hard"
 }
-
-
